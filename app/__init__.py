@@ -4,7 +4,7 @@ from .api import configure_api
 
 
 def create_app(config_name):
-    app = Flask('api-users')
+    app = Flask(__name__)
 
     app.config.from_object(config[config_name])
 
