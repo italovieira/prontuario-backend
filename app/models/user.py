@@ -1,10 +1,16 @@
-class User:
-    def __init__(self, cpf, name):
-        self.cpf = cpf
-        self.name = name
+from .model import Model
 
-    def serialize(self):
-        return {
-                'cpf': self.cpf,
-                'name': self.name
-        }
+from ..db import db
+
+
+class User:
+
+    def __init__(self, cpf, nome, data_nasc, telefone, email, senha, sexo, endereco):
+        self.cpf = cpf
+        self.nome = nome
+        self.data_nasc = data_nasc
+        self.telefone = telefone
+        self.email = email
+        self.senha = senha
+        self.sexo = sexo
+        self.endereco = endereco
