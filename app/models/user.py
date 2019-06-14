@@ -1,14 +1,14 @@
 from .model import Model
 
-from ..db import db
+from ..util import format_date
 
 
-class User:
+class User(Model):
 
     def __init__(self, cpf, nome, data_nasc, telefone, email, senha, sexo, endereco):
         self.cpf = cpf
         self.nome = nome
-        self.data_nasc = data_nasc
+        self.data_nasc = format_date(data_nasc)
         self.telefone = telefone
         self.email = email
         self.senha = senha

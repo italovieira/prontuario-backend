@@ -1,8 +1,8 @@
-from flask import jsonify
 from flask_restful import Resource, reqparse
 
 from ..models.user import User
-from ..db.user import get_user, get_users, save_user, update_user, delete_user
+
+from ..dao.user import UserDAO
 
 
 parser = reqparse.RequestParser()
@@ -15,17 +15,19 @@ parser.add_argument('senha')
 parser.add_argument('sexo')
 parser.add_argument('endereco')
 
+_dao = UserDAO()
+
 class UserApi(Resource):
 
     def get(self, cpf):
-        user = get_user(cpf)
-        return jsonify(vars(user))
+        user = _dao.get_user(cpf)
+        return user.serialize()
 
     def put(self, cpf):
         args = parser.parse_args()
         user = User(**args)
-        update_user(cpf, user)
-        return vars(user), 201
+        _dao.update_user(cpf, user)
+        return user.serialize(), 201
 
     def delete(self, cpf):
         delete_user(cpf)
@@ -35,12 +37,12 @@ class UserApi(Resource):
 class UserListApi(Resource):
 
     def get(self):
-        users = get_users()
-        return jsonify([vars(user) for user in users])
+        users = _dao.get_users()
+        return [user.serialize() for user in users]
 
     def post(self):
         args = parser.parse_args()
         user = User(**args)
-        save_user(user)
+        _dao.save_user(user)
 
         return user.cpf
