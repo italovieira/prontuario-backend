@@ -4,6 +4,7 @@ from .usuario import UsuarioApi, UsuarioListApi
 from .paciente import PacienteApi, PacienteListApi
 from .medico import MedicoApi, MedicoListApi
 from .secretario import SecretarioApi, SecretarioListApi
+from .hospital import HospitalApi, HospitalListApi
 
 
 api = Api()
@@ -19,5 +20,8 @@ def configure_api(app):
 
     api.add_resource(SecretarioApi, '/secretarios/<cpf>')
     api.add_resource(SecretarioListApi, '/secretarios')
+
+    api.add_resource(HospitalApi, '/hospitais/<cnpj>')
+    api.add_resource(HospitalListApi, '/hospitais')
 
     api.init_app(app)
