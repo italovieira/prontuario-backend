@@ -1,5 +1,7 @@
 from .model import Model
 
+from ..util import format_date
+
 
 class Internacao(Model):
 
@@ -8,5 +10,5 @@ class Internacao(Model):
         self.crm_medico = crm_medico
         self.cnpj_hospital = cnpj_hospital
         self.descricao = descricao
-        self.data_in = data_in
-        self.data_out = data_out
+        self.data_in = format_date(data_in)
+        self.data_out = format_date(data_out)
