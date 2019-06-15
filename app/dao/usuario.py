@@ -25,7 +25,6 @@ class UsuarioDAO:
     def save_usuario(self, usuario: Usuario):
         cursor = db.connection.cursor()
         cursor.execute('INSERT INTO usuario (cpf, nome, data_nasc, telefone, email, senha, sexo, endereco) VALUES (%s ,%s ,%s ,%s ,%s ,%s ,%s ,%s)', (usuario.cpf, usuario.nome, usuario.data_nasc, usuario.telefone, usuario.email, usuario.senha, usuario.sexo, usuario.endereco))
-        db.connection.commit()
         cursor.close()
 
 
