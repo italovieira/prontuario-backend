@@ -41,7 +41,7 @@ class ConsultaListApi(Resource):
         consulta = Consulta(**args)
         _dao.save_consulta(consulta)
 
-        return consulta.cpf
+        return consulta
 
 
 class PacienteConsultaListApi(Resource):
@@ -49,3 +49,14 @@ class PacienteConsultaListApi(Resource):
     def get(self, cpf):
         consultas = _dao.get_consultas_from_paciente(cpf)
         return [consulta.serialize() for consulta in consultas]
+
+
+class IniciarConsultaApi(Resource):
+
+    def post(self, crm):
+        args = parser.parse_args()
+        args['crm_medico'] = crm
+        consulta = Consulta(**args)
+        _dao.save_consulta(consulta)
+
+        return consulta

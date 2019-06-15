@@ -14,9 +14,10 @@ class PacienteDAO:
         result = cursor.fetchone()
         cursor.close()
 
-        dados = usuario.serialize()
-        dados['tipo_sanguineo'] = result[0]
-        return Paciente(**dados)
+        if result:
+            dados = usuario.serialize()
+            dados['tipo_sanguineo'] = result[0]
+            return Paciente(**dados)
 
 
     def get_pacientes(self):

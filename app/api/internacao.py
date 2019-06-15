@@ -7,9 +7,9 @@ from ..dao.internacao import InternacaoDAO
 
 
 parser = reqparse.RequestParser()
-parser.add_argument('cpf_paciente')
-parser.add_argument('crm_medico')
-parser.add_argument('cnpj_hospital')
+parser.add_argument('cpf_paciente', required=True)
+parser.add_argument('crm_medico', required=True)
+parser.add_argument('cnpj_hospital', required=True)
 parser.add_argument('descricao')
 parser.add_argument('data_in')
 parser.add_argument('data_out')
@@ -29,7 +29,7 @@ class InternacaoApi(Resource):
         return internacao.serialize(), 201
 
     def delete(self, cpf):
-        delete_internacao(cpf)
+        _dao.delete_internacao(cpf)
         return '', 204
 
 
@@ -44,7 +44,7 @@ class InternacaoListApi(Resource):
         internacao = Internacao(**args)
         _dao.save_internacao(internacao)
 
-        return internacao.cpf
+        return internacao
 
 
 class PacienteInternacaoListApi(Resource):
@@ -52,3 +52,14 @@ class PacienteInternacaoListApi(Resource):
     def get(self, cpf):
         internacoes = _dao.get_internacoes_from_paciente(cpf)
         return [internacao.serialize() for internacao in internacoes]
+
+
+class IniciarInternacaoApi(Resource):
+
+    def post(self, crm):
+        args = parser.parse_args()
+        args['crm_medico'] = crm
+        internacao = Internacao(**args)
+        _dao.save_internacao(internacao)
+
+        return internacao

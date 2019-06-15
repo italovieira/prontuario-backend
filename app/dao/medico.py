@@ -7,19 +7,36 @@ _usuario_dao = UsuarioDAO()
 class MedicoDAO:
 
     def get_medico(self, crm):
-
         cursor = db.connection.cursor()
         cursor.execute('SELECT cpf_medico FROM medico WHERE crm_medico = %s', (crm,))
         result = cursor.fetchone()
         cursor.close()
 
-        cpf = result[0]
-        usuario = _usuario_dao.get_usuario(cpf)
+        if result:
+            cpf = result[0]
+        else:
+            return None
 
-        dados = usuario.serialize()
-        dados['crm'] = crm
-        dados['hospitais'] = self.get_hospitais_by_medico(crm)
-        return Medico(**dados)
+        usuario = _usuario_dao.get_usuario(cpf)
+        if usuario:
+            dados = usuario.serialize()
+            dados['crm'] = crm
+            dados['hospitais'] = self.get_hospitais_by_medico(crm)
+            return Medico(**dados)
+        return None
+
+
+    def get_medico_from_cpf(self, cpf):
+        cursor = db.connection.cursor()
+        cursor.execute('SELECT crm_medico FROM medico WHERE cpf_medico = %s', (cpf,))
+        result = cursor.fetchone()
+        cursor.close()
+
+        if result:
+            crm = result[0]
+            return self.get_medico(crm)
+
+        return None
 
 
     def get_medicos(self):

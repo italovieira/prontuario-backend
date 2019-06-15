@@ -40,3 +40,15 @@ class UsuarioDAO:
         cursor.execute('DELETE FROM usuario WHERE cpf = %s', (cpf,))
         db.connection.commit()
         cursor.close()
+
+
+    def verify_credentials(self, email, senha):
+        cursor = db.connection.cursor()
+        cursor.execute('SELECT cpf FROM usuario WHERE email = %s AND senha = %s' , (email, senha))
+        result = cursor.fetchone()
+        cursor.close()
+
+        if result:
+            return result[0]
+        return None
+

@@ -10,7 +10,8 @@ class HospitalDAO:
         result = cursor.fetchone()
         cursor.close()
 
-        return Hospital(*result)
+        if result:
+            return Hospital(*result)
 
 
     def get_hospitals(self):

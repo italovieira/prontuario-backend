@@ -14,9 +14,10 @@ class SecretarioDAO:
         result = cursor.fetchone()
         cursor.close()
 
-        dados = usuario.serialize()
-        dados['cnpj_hospital'] = result[0]
-        return Secretario(**dados)
+        if result:
+            dados = usuario.serialize()
+            dados['cnpj_hospital'] = result[0]
+            return Secretario(**dados)
 
 
     def get_secretarios(self):
