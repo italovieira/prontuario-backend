@@ -3,6 +3,7 @@ from flask_restful import Api
 from .usuario import UsuarioApi, UsuarioListApi
 from .paciente import PacienteApi, PacienteListApi
 from .medico import MedicoApi, MedicoListApi
+from .secretario import SecretarioApi, SecretarioListApi
 
 
 api = Api()
@@ -15,5 +16,8 @@ def configure_api(app):
 
     api.add_resource(MedicoApi, '/medicos/<crm>')
     api.add_resource(MedicoListApi, '/medicos')
+
+    api.add_resource(SecretarioApi, '/secretarios/<cpf>')
+    api.add_resource(SecretarioListApi, '/secretarios')
 
     api.init_app(app)
