@@ -32,7 +32,7 @@ class SecretarioApi(Resource):
         return secretario.serialize(), 201
 
     def delete(self, cpf):
-        delete_secretario(cpf)
+        _dao.delete_secretario(cpf)
         return '', 204
 
 

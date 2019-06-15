@@ -2,7 +2,7 @@ from .usuario import Usuario
 
 
 class Medico(Usuario):
-    def __init__(self, cpf, nome, data_nasc, telefone, email, senha, sexo, endereco, crm, hospitais):
+    def __init__(self, cpf, nome, data_nasc, telefone, email, senha, sexo, endereco, crm, hospitais=[]):
         super().__init__(cpf, nome, data_nasc, telefone, email, senha, sexo, endereco)
         self.crm = crm
         self.hospitais = hospitais

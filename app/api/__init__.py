@@ -5,7 +5,10 @@ from .paciente import PacienteApi, PacienteListApi
 from .medico import MedicoApi, MedicoListApi
 from .secretario import SecretarioApi, SecretarioListApi
 from .hospital import HospitalApi, HospitalListApi
-
+from .exame import PacienteExameListApi
+from .internacao import PacienteInternacaoListApi
+from .cirurgia import PacienteCirurgiaListApi
+from .consulta import PacienteConsultaListApi
 
 api = Api()
 def configure_api(app):
@@ -13,6 +16,10 @@ def configure_api(app):
     api.add_resource(UsuarioListApi, '/usuarios')
 
     api.add_resource(PacienteApi, '/pacientes/<cpf>')
+    api.add_resource(PacienteExameListApi, '/pacientes/<cpf>/exames')
+    api.add_resource(PacienteCirurgiaListApi, '/pacientes/<cpf>/cirurgias')
+    api.add_resource(PacienteInternacaoListApi, '/pacientes/<cpf>/internacoes')
+    api.add_resource(PacienteConsultaListApi, '/pacientes/<cpf>/consultas')
     api.add_resource(PacienteListApi, '/pacientes')
 
     api.add_resource(MedicoApi, '/medicos/<crm>')
