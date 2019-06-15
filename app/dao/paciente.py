@@ -44,7 +44,7 @@ class PacienteDAO:
 
     def update_paciente(self, cpf, paciente: Paciente):
         cursor = db.connection.cursor()
-        cursor.execute('UPDATE paciente SET tipo_sanguineo = %s', (paciente.tipo_sanguineo))
+        cursor.execute('UPDATE paciente SET tipo_sanguineo = %s WHERE cpf_paciente = %s', (paciente.tipo_sanguineo, paciente.cpf))
         cursor.close()
 
         _usuario_dao.update_usuario(cpf, paciente)

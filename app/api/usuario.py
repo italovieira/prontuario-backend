@@ -30,7 +30,7 @@ class UsuarioApi(Resource):
         return usuario.serialize(), 201
 
     def delete(self, cpf):
-        delete_usuario(cpf)
+        _dao.delete_usuario(cpf)
         return '', 204
 
 
