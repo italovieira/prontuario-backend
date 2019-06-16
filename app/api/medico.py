@@ -24,7 +24,8 @@ class MedicoApi(Resource):
 
     def get(self, crm):
         medico = _dao.get_medico(crm)
-        return medico.serialize()
+        if medico:
+            return medico.serialize()
 
     def put(self, crm):
         args = parser.parse_args()

@@ -17,9 +17,6 @@ api = Api()
 def configure_api(app):
     api.add_resource(LoginApi, '/login')
 
-    api.add_resource(UsuarioApi, '/usuarios/<cpf>')
-    api.add_resource(UsuarioListApi, '/usuarios')
-
     api.add_resource(PacienteApi, '/pacientes/<cpf>')
     api.add_resource(PacienteExameListApi, '/pacientes/<cpf>/exames')
     api.add_resource(PacienteCirurgiaListApi, '/pacientes/<cpf>/cirurgias')

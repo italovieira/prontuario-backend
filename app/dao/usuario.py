@@ -10,7 +10,8 @@ class UsuarioDAO:
         result = cursor.fetchone()
         cursor.close()
 
-        return Usuario(*result)
+        if result:
+            return Usuario(*result)
 
 
     def get_usuarios(self):
