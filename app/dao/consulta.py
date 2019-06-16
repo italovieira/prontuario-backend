@@ -6,11 +6,12 @@ class ConsultaDAO:
 
     def get_consulta(self, id_consulta):
         cursor = db.connection.cursor()
-        cursor.execute('SELECT * FROM consulta WHERE id_consulta = %s', (id_consulta,))
+        cursor.execute('SELECT cpf_paciente, crm_medico, data FROM consulta WHERE id_consulta = %s', (id_consulta,))
         result = cursor.fetchone()
         cursor.close()
 
-        return Consulta(*result)
+        if result:
+            return Consulta(*result)
 
 
     def get_consultas(self):
@@ -31,7 +32,7 @@ class ConsultaDAO:
 
     def get_consultas_from_paciente(self, cpf_paciente):
         cursor = db.connection.cursor()
-        cursor.execute('SELECT * FROM consulta WHERE cpf_paciente = %s', (cpf_paciente,))
+        cursor.execute('SELECT cpf_paciente, crm_medico, data FROM consulta WHERE cpf_paciente = %s', (cpf_paciente,))
         result = cursor.fetchall()
         cursor.close()
 

@@ -6,7 +6,7 @@ class InternacaoDAO:
 
     def get_internacao(self, id_internacao):
         cursor = db.connection.cursor()
-        cursor.execute('SELECT * FROM internacao WHERE id_internacao = %s', (id_internacao,))
+        cursor.execute('SELECT cpf_paciente, crm_medico, cnpj_hospital, descricao, data_in, data_out FROM internacao WHERE id_internacao = %s', (id_internacao,))
         result = cursor.fetchone()
         cursor.close()
 
@@ -15,7 +15,7 @@ class InternacaoDAO:
 
     def get_internacoes(self):
         cursor = db.connection.cursor()
-        cursor.execute('SELECT * FROM internacao')
+        cursor.execute('SELECT cpf_paciente, crm_medico, cnpj_hospital, descricao, data_in, data_out FROM internacao')
         result = cursor.fetchall()
         cursor.close()
 
@@ -31,7 +31,7 @@ class InternacaoDAO:
 
     def get_internacoes_from_paciente(self, cpf_paciente):
         cursor = db.connection.cursor()
-        cursor.execute('SELECT * FROM internacao WHERE cpf_paciente = %s', (cpf_paciente,))
+        cursor.execute('SELECT cpf_paciente, crm_medico, cnpj_hospital, descricao, data_in, data_out FROM internacao WHERE cpf_paciente = %s', (cpf_paciente,))
         result = cursor.fetchall()
         cursor.close()
 

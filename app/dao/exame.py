@@ -6,16 +6,17 @@ class ExameDAO:
 
     def get_exame(self, id_exame):
         cursor = db.connection.cursor()
-        cursor.execute('SELECT * FROM exame WHERE id_exame = %s', (id_exame,))
+        cursor.execute('SELECT cpf_paciente, resultado, tipo, data, nome_local FROM exame WHERE id_exame = %s', (id_exame,))
         result = cursor.fetchone()
         cursor.close()
 
-        return Exame(*result)
+        if result:
+            return Exame(*result)
 
 
     def get_exames(self):
         cursor = db.connection.cursor()
-        cursor.execute('SELECT * FROM exame')
+        cursor.execute('SELECT cpf_paciente, resultado, tipo, data, nome_local FROM exame')
         result = cursor.fetchall()
         cursor.close()
 
@@ -31,7 +32,7 @@ class ExameDAO:
 
     def get_exames_from_paciente(self, cpf_paciente):
         cursor = db.connection.cursor()
-        cursor.execute('SELECT * FROM exame WHERE cpf_paciente = %s', (cpf_paciente,))
+        cursor.execute('SELECT cpf_paciente, resultado, tipo, data, nome_local FROM exame WHERE cpf_paciente = %s', (cpf_paciente,))
         result = cursor.fetchall()
         cursor.close()
 
