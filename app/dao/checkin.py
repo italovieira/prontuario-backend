@@ -26,7 +26,7 @@ class CheckinDAO():
 
     def get_checkins_from_hospital(self, cnpj_hospital):
         cursor = db.connection.cursor()
-        cursor.execute('SELECT c.cpf_paciente, c.cpf_secretario, data FROM check_in AS c, secretario AS s WHERE c.cpf_secretario = s.cpf_secretario AND s.cnpj_hospital = %s', (cnpj_hospital,))
+        cursor.execute('SELECT c.cpf_paciente, c.cpf_secretario, data FROM check_in AS c, secretario AS s WHERE c.cpf_secretario = s.cpf_secretario AND s.cnpj_hospital = %s ORDER BY data DESC', (cnpj_hospital,))
         result = cursor.fetchall()
         cursor.close()
 
