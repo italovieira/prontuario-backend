@@ -2,7 +2,7 @@ from ..models.checkin import Checkin
 from ..db import db
 
 
-class CheckinDAO:
+class CheckinDAO():
 
     def get_checkin(self, id_checkin):
         pass

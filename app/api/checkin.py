@@ -7,7 +7,7 @@ from ..dao.checkin import CheckinDAO
 
 parser = reqparse.RequestParser()
 parser.add_argument('cpf_paciente', required=True)
-parser.add_argument('cpf_secretario', required=True)
+parser.add_argument('cpf_secretario')
 parser.add_argument('data')
 
 _dao = CheckinDAO()
@@ -58,4 +58,4 @@ class NovoCheckinApi(Resource):
         checkin = Checkin(**args)
         _dao.save_checkin(checkin)
 
-        return checkin
+        return checkin.serialize()
