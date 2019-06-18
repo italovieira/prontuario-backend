@@ -14,6 +14,16 @@ class UsuarioDAO:
             return Usuario(*result)
 
 
+    def get_nome_usuario_from_cpf(self, cpf):
+        cursor = db.connection.cursor()
+        cursor.execute('SELECT nome FROM usuario WHERE cpf = %s', (cpf,))
+        result = cursor.fetchone()
+        cursor.close()
+
+        if result:
+            return result[0]
+
+
     def get_usuarios(self):
         cursor = db.connection.cursor()
         cursor.execute('SELECT * FROM usuario')
