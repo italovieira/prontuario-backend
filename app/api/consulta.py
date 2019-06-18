@@ -59,4 +59,4 @@ class IniciarConsultaApi(Resource):
         consulta = Consulta(**args)
         _dao.save_consulta(consulta)
 
-        return consulta
+        return consulta.serialize()

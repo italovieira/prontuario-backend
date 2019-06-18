@@ -2,7 +2,7 @@ from ..models.consulta import Consulta
 from ..db import db
 
 
-class ConsultaDAO:
+class ConsultaDAO():
 
     def get_consulta(self, id_consulta):
         cursor = db.connection.cursor()
